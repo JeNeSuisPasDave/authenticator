@@ -40,4 +40,4 @@ x = HOTP.__class__
 
 __author__ = "Dave Hein <dhein@acm.org>"
 __license__ = "MIT"
-__version__ = "1.1.0"
+__version__ = "1.1.1"
