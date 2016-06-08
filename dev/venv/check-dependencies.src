@@ -1,0 +1,228 @@
+# NOTE: expect that this is preceded by:
+# source check-functions.src
+#
+
+# pip install cryptography, iso8601
+#
+#
+CFFI_EXP_VSN_=1.6.0
+CFFI_MAX_VSN_=1.6.1
+CRYPTOGRAPHY_EXP_VSN_=1.4
+CRYPTOGRAPHY_MAX_VSN_=1.5
+IDNA_EXP_VSN_=2.1
+IDNA_MAX_VSN_=2.2
+ISO8601_EXP_VSN_=0.1.11
+ISO8601_MAX_VSN_=0.1.12
+PYASN1_EXP_VSN_=0.1.9
+PYASN1_MAX_VSN_=0.1.10
+PYCPARSER_EXP_VSN_=2.14
+PYCPARSER_MAX_VSN_=2.15
+SIX_EXP_VSN_=1.10.0
+SIX_MAX_VSN_=1.10.1
+
+# For linting
+#
+FLAKE8_EXP_VSN_=2.5.4
+FLAKE8_MAX_VSN_=2.5.5
+MCCABE_EXP_VSN_=0.4.0
+MCCABE_MAX_VSN_=0.4.1
+PEP257_EXP_VSN_=0.7.0
+PEP257_MAX_VSN_=0.7.1
+PEP8_EXP_VSN_=1.7.0
+PEP8_MAX_VSN_=1.7.1
+PEP8NAMING_EXP_VSN_=0.3.3
+PEP8NAMING_MAX_VSN_=0.3.4
+PYFLAKES_EXP_VSN_=1.0.0
+PYFLAKES_MAX_VSN_=1.0.1
+
+# For creating PyPI packages
+#
+PKGINFO_EXP_VSN_=1.3.2
+PKGINFO_MAX_VSN_=1.3.3
+REQUESTS_EXP_VSN_=2.10.0
+REQUESTS_MAX_VSN_=2.10.1
+REQUESTSTOOLBELT_EXP_VSN_=0.6.2
+REQUESTSTOOLBELT_MAX_VSN_=0.6.3
+TWINE_EXP_VSN_=1.6.5
+TWINE_MAX_VSN_=1.6.6
+WHEEL_EXP_VSN_=0.29.0
+WHEEL_MAX_VSN_=0.29.1
+
+check_dependent_version() {
+  local PKG_=$1
+  local EXP_=$2
+  local MAX_=$3
+
+  check_dependent_version=( )
+
+  local msg_=( " " )
+  OK_=$(check_installed "${PKG_}")
+  if (( 0 == ${OK_} )); then
+    msg_[0]=" "
+    msg_[1]="ERROR: ${PKG_} is not installed"
+    msg_[2]=" "
+    msg_[3]="Try './provision-venv.sh' to install ${PKG_}, and "
+    msg_[3]="${msg_[3]}then try '${SCRIPTNAME_}' again."
+    msg_[4]=" "
+    IFS=$'\n' check_dependent_version=( ${msg_[@]} )
+    return 1
+  fi
+  OK_=$(check_installed_version "${PKG_}" "${EXP_}" "${MAX_}")
+  if [[ ! -z "${OK_}" ]]; then
+    msg_[0]=" "
+    msg_[1]="ERROR: Expecting ${PKG_} ${EXP_} or later, "
+    msg_[1]="${msg_[1]}up to ${MAX_}."
+    msg_[2]="Found ${OK_}"
+    msg_[3]=" "
+    IFS=$'\n' check_dependent_version=( ${msg_[@]} )
+    return 2
+  fi
+
+  # Get out
+  #
+  return 0
+}
+
+# Capture pip packages
+#
+PKGS_=`pip list`
+
+# Check installed versions
+#
+check_dependent_version "cffi" "${CFFI_EXP_VSN_}" "${CFFI_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+check_dependent_version "cryptography" "${CRYPTOGRAPHY_EXP_VSN_}" "${CRYPTOGRAPHY_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+check_dependent_version "idna" "${IDNA_EXP_VSN_}" "${IDNA_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+check_dependent_version "iso8601" "${ISO8601_EXP_VSN_}" "${ISO8601_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+check_dependent_version "pyasn1" "${PYASN1_EXP_VSN_}" "${PYASN1_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+check_dependent_version "pycparser" "${PYCPARSER_EXP_VSN_}" "${PYCPARSER_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+check_dependent_version "six" "${SIX_EXP_VSN_}" "${SIX_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "flake8" "${FLAKE8_EXP_VSN_}" "${FLAKE8_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "mccabe" "${MCCABE_EXP_VSN_}" "${MCCABE_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "pep257" "${PEP257_EXP_VSN_}" "${PEP257_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "pep8" "${PEP8_EXP_VSN_}" "${PEP8_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "pep8-naming" "${PEP8NAMING_EXP_VSN_}" "${PEP8NAMING_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "pyflakes" "${PYFLAKES_EXP_VSN_}" "${PYFLAKES_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "pkginfo" "${PKGINFO_EXP_VSN_}" "${PKGINFO_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "requests" "${REQUESTS_EXP_VSN_}" "${REQUESTS_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "requests-toolbelt" "${REQUESTSTOOLBELT_EXP_VSN_}" "${REQUESTSTOOLBELT_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "twine" "${TWINE_EXP_VSN_}" "${TWINE_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "wheel" "${WHEEL_EXP_VSN_}" "${WHEEL_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi

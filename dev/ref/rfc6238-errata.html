@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+    <title>RFC Errata Report</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<script src="rfc6238-errata_files/validate_rfcsearch.js" type="text/javascript">
+</script>
+
+<link rel="stylesheet" href="rfc6238-errata_files/rfc-editor.css" type="text/css">
+<script>try {  for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){    var lastpass_f = document.forms[lastpass_iter];    if(typeof(lastpass_f.lpsubmitorig)=="undefined"){      if (typeof(lastpass_f.submit) == "function") {        lastpass_f.lpsubmitorig = lastpass_f.submit;        lastpass_f.submit = function(){          var form = this;          try {            if (document.documentElement && 'createEvent' in document)            {              var forms = document.getElementsByTagName('form');              for (var i=0 ; i<forms.length ; ++i)                if (forms[i]==form)                {                  var element = document.createElement('lpformsubmitdataelement');                  element.setAttribute('formnum',i);                  element.setAttribute('from','submithook');                  document.documentElement.appendChild(element);                  var evt = document.createEvent('Events');                  evt.initEvent('lpformsubmit',true,false);                  element.dispatchEvent(evt);                  break;                }            }          } catch (e) {}          try {            form.lpsubmitorig();          } catch (e) {}        }      }    }  }} catch (e) {}</script></head>
+<body>
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+          <tr>
+            <td height="87" valign="top" width="677">
+               <hr>
+               <a href="http://www.rfc-editor.org/errata.php">
+                  <img src="rfc6238-errata_files/header_rfcerrata.gif" alt="errata logo graphic" class="islink">
+               </a>
+            </td>
+          </tr>
+         <tr valign="top">
+         <td valign="top" width="677">
+          <hr>
+         </td>
+        </tr></tbody>
+     </table>
+
+        <noscript>
+           <p class="warning">
+These pages are designed to work with JavaScript enabled. Please
+enable JavaScript for this site.
+           </p>
+        </noscript>
+<!--
+create_adv_search_form: $criteria=
+array(3) {
+  ["presentation"]=>
+  string(7) "records"
+  ["rfc"]=>
+  string(4) "6238"
+  ["rec_status"]=>
+  string(3) "all"
+}
+
+$action=errata_search.php
+$for_edit=
+-->
+
+<form method="get" id="query" action="errata_search.php" onsubmit="return validateRFCSearchForm(this);">
+  <table class="search">
+     <tbody><tr class="sbar">
+       <th colspan="4">Errata Search</th>
+     </tr>
+     <tr class="ibar">
+       <td class="search_label_bold" colspan="2">
+         <label for="rfc"><abbr>RFC</abbr> Number:</label>
+         <input id="rfc" name="rfc" size="4" maxlength="4" value="6238" type="text">
+        </td>
+       <td class="search_label_bold" colspan="2">
+         <label for="eid">Errata <abbr>ID</abbr>:</label>
+         <input id="eid" name="eid" size="4" maxlength="4" type="text">
+       </td>
+     </tr>
+    <tr><td colspan="4">&nbsp;</td></tr>
+     <tr class="ibar">
+       <td style="text-decoration: underline;">Source of <abbr>RFC</abbr></td>
+
+       <td>&nbsp;</td>       <td><label for="rec_status">Status:</label></td>
+       <td class="userdata">
+           <select name="rec_status" id="rec_status"><!-- rec_status key in $criteria: all -->
+             <option selected="selected" value="15">All/Any</option>
+<option value="0">Verified+Reported</option>             <option value="1">Verified</option>
+             <option value="2">Reported</option>
+             <option value="3">Held for Document Update</option>
+             <option value="9">Rejected</option>
+           </select>
+       </td>
+     </tr>
+     <tr class="ibar">
+       <td><label for="area_acronym">Area Acronym:</label></td>
+       <td class="userdata">
+           <select name="area_acronym" id="area_acronym"><option value="" selected="selected">All/Any</option>
+             <option value="app">app</option>
+             <option value="gen">gen</option>
+             <option value="int">int</option>
+             <option value="ops">ops</option>
+             <option value="rai">rai</option>
+             <option value="rtg">rtg</option>
+             <option value="sec">sec</option>
+             <option value="tsv">tsv</option>
+            </select>
+       </td>
+       <td>
+          <label for="errata_type">Type:</label>
+       </td>
+       <td class="userdata">
+           <select name="errata_type" id="errata_type">
+             <option value="" selected="selected">All/Any</option>             <option value="1">Editorial</option>
+             <option value="2">Technical</option>
+           </select>
+        </td>
+     </tr>
+     <tr class="ibar">
+       <td>
+          <label for="wg_acronym">WG Acronym:</label>
+       </td>
+       <td class="userdata">
+          <input id="wg_acronym" size="6" name="wg_acronym" maxlength="10" type="text">
+         </td>
+       <td>
+          <label for="submitter_name">Submitter Name:</label>
+       </td>
+       <td class="userdata">
+          <input id="submitter_name" size="20" name="submitter_name" maxlength="60" type="text">
+       </td>
+     </tr>
+     <tr class="ibar">
+       <td>
+          <label for="stream_name">Other:</label>
+       </td>
+       <td class="userdata">
+          <select name="stream_name" id="stream_name"><option value="" selected="selected">All/Any</option>
+            <option value="IAB">IAB</option>
+            <option value="INDEPENDENT">INDEPENDENT</option>
+            <option value="IRTF">IRTF</option>
+            <option value="Legacy">Legacy</option>
+          </select>
+       </td>
+       <td>
+          <label for="submit_date">Date Submitted:</label>
+       </td>
+       <td class="userdata">
+          <input id="submit_date" size="8" name="submit_date" maxlength="10" type="text">
+       </td>
+     </tr>
+     <tr class="sbar">
+       <td colspan="4">
+         <div>
+        Summary Table<input name="presentation" id="presentationT" value="table" type="radio">
+        Full Records<input name="presentation" id="presentationR" checked="checked" value="records" type="radio">
+         </div>
+         <input value="Search" type="submit">
+         <input value="Reset Fields" onclick="return clearAdvSearchForm(document.forms.query);" type="button">
+       </td>
+     </tr>
+  </tbody></table>
+</form>
+<script type="text/javascript">
+<!--
+          document.forms.query.rfc.focus();
+//-->
+</script>
+<!-- 
+<h4>errata_adv_lookup driver</h4>
+<pre>$criteria:
+array(3) {
+  ["presentation"]=>
+  string(7) "records"
+  ["rfc"]=>
+  string(4) "6238"
+  ["rec_status"]=>
+  string(3) "all"
+}
+
+</pre> -->
+<!-- found_count: $count_query=
+string(478) "SELECT e.errata_id
+FROM errata e, errata_type_codes t , errata_status_codes s,
+           working_group w, area a, 
+           `index` i left join area_assignments n on i.internal_key = n.fk_index
+      WHERE e.`doc-id` = i.`doc-id` AND 
+            e.type_id=t.errata_type_id AND 
+            e.status_id=s.errata_status_id AND
+            i.source = w.wg_name AND
+            (a.area_name = w.area_name OR n.fk_area = a.area_id) AND e.`doc-id` = 'RFC6238' GROUP BY e.errata_id"
+
+-->
+<p>Found 3 records.</p>
+<!-- <pre>query_verified: $query=
+SELECT e.`doc-id`, errata_id, title, `pub-date`,errata_type_code,
+             errata_status_code, submit_date, posted_date, verifier_id,
+             verifier_name, verifier_email, submitter_name, submitter_email,
+             orig_text, correct_text, e.notes, section, rs_code, e.insert_date,
+             e.update_date, conv_format_check, i.source,
+             submit_date, submitter_name, section, w.`ssp_id`
+      FROM errata e, errata_type_codes t , errata_status_codes s,
+           working_group w, area a, 
+           `index` i left join area_assignments n on i.internal_key = n.fk_index
+      WHERE e.`doc-id` = i.`doc-id` AND 
+            e.type_id=t.errata_type_id AND 
+            e.status_id=s.errata_status_id AND
+            i.source = w.wg_name AND
+            (a.area_name = w.area_name OR n.fk_area = a.area_id) AND e.`doc-id` = 'RFC6238' AND e.status_id = 1 GROUP BY errata_id ORDER BY i.`doc-id`, e.type_id DESC
+</pre> -->
+<h2>Status: <a href="http://www.rfc-editor.org/status_type_desc.html">Verified</a> (1)</h2>
+<h2><a href="http://www.rfc-editor.org/rfc/rfc6238.txt" target="_blank">RFC6238</a>, "TOTP: Time-Based One-Time Password Algorithm", May 2011</h2>
+<a href="http://www.rfc-editor.org/source_desc.html">Source of RFC</a>: IETF - NON WORKING GROUP<br>
+Area Assignment: sec<br>
+<p>
+Errata ID: 2866<br><br>
+<b>Status: Verified<br>
+Type: Technical<br>
+</b><br>
+Reported By: Michal Altair Valasek<br>
+Date Reported: 2011-07-20<br>
+Verifier Name: Sean Turner<br>
+Date Verified: 2011-11-12<br>
+</p>
+<p>Section Appendix B says:
+</p>
+<pre class="rfctext">The test token shared secret uses the ASCII string value "12345678901234567890".
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">The test token shared secrets use the following ASCII string values:
+- HMAC-SHA1: "12345678901234567890" (20 bytes)
+- HMAC-SHA256: "12345678901234567890123456789012" (32 bytes)
+- HMAC-SHA512: "1234567890123456789012345678901234567890123456789012345678901234" (64 bytes)
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+The secret values are different for different hash types. The example 
+Java code respects this, but the test vector documentation does not.
+</p>
+<hr>
+<!-- <pre>query_reported: $query=
+SELECT e.`doc-id`, errata_id, title, `pub-date`,errata_type_code,
+             errata_status_code, submit_date, posted_date, verifier_id,
+             verifier_name, verifier_email, submitter_name, submitter_email,
+             orig_text, correct_text, e.notes, section, rs_code, e.insert_date,
+             e.update_date, conv_format_check, i.source,
+             submit_date, submitter_name, section, w.`ssp_id`
+      FROM errata e, errata_type_codes t , errata_status_codes s,
+           working_group w, area a, 
+           `index` i left join area_assignments n on i.internal_key = n.fk_index
+      WHERE e.`doc-id` = i.`doc-id` AND 
+            e.type_id=t.errata_type_id AND 
+            e.status_id=s.errata_status_id AND
+            i.source = w.wg_name AND
+            (a.area_name = w.area_name OR n.fk_area = a.area_id) AND e.`doc-id` = 'RFC6238' AND e.status_id = 2 GROUP BY errata_id ORDER BY i.`doc-id`, e.type_id DESC
+</pre> -->
+<!-- <p>No records found for status Reported.</p> -->
+<!-- <pre>query_held: $query=
+SELECT e.`doc-id`, errata_id, title, `pub-date`,errata_type_code,
+             errata_status_code, submit_date, posted_date, verifier_id,
+             verifier_name, verifier_email, submitter_name, submitter_email,
+             orig_text, correct_text, e.notes, section, rs_code, e.insert_date,
+             e.update_date, conv_format_check, i.source,
+             submit_date, submitter_name, section, w.`ssp_id`
+      FROM errata e, errata_type_codes t , errata_status_codes s,
+           working_group w, area a, 
+           `index` i left join area_assignments n on i.internal_key = n.fk_index
+      WHERE e.`doc-id` = i.`doc-id` AND 
+            e.type_id=t.errata_type_id AND 
+            e.status_id=s.errata_status_id AND
+            i.source = w.wg_name AND
+            (a.area_name = w.area_name OR n.fk_area = a.area_id) AND e.`doc-id` = 'RFC6238' AND e.status_id = 3 GROUP BY errata_id ORDER BY i.`doc-id`, e.type_id DESC
+</pre> -->
+<h2>Status: <a href="http://www.rfc-editor.org/status_type_desc.html">Held for Document Update</a> (2)</h2>
+<h2><a href="http://www.rfc-editor.org/rfc/rfc6238.txt" target="_blank">RFC6238</a>, "TOTP: Time-Based One-Time Password Algorithm", May 2011</h2>
+<a href="http://www.rfc-editor.org/source_desc.html">Source of RFC</a>: IETF - NON WORKING GROUP<br>
+Area Assignment: sec<br>
+<p>
+Errata ID: 3338<br><br>
+<b>Status: Held for Document Update<br>
+Type: Editorial<br>
+</b><br>
+Reported By: Samuel Whited<br>
+Date Reported: 2012-09-06<br>
+Held for Document Update by: Sean Turner<br>
+</p>
+<p>Section 1.2 says:
+</p>
+<pre class="rfctext">Basically, the output of the HMAC-SHA-1 calculation is truncated to
+obtain user-friendly values:
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">The output of the HMAC-SHA-1 calculation is truncated to
+obtain user-friendly values:
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+Starting a sentence with `Basically' is often considered bad form.<br>
+Qualifiers such as basically add nothing to the sentence and should<br>
+generally be avoided.
+</p>
+<hr>
+<p>
+Errata ID: 3339<br><br>
+<b>Status: Held for Document Update<br>
+Type: Editorial<br>
+</b><br>
+Reported By: Samuel Whited<br>
+Date Reported: 2012-09-06<br>
+Held for Document Update by: Sean Turner<br>
+</p>
+<p>Section 4.2 says:
+</p>
+<pre class="rfctext">Basically, we define TOTP as TOTP = HOTP(K, T), where T is an integer
+and represents the number of time steps between the initial counter
+time T0 and the current Unix time.
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">We define TOTP as TOTP = HOTP(K, T), where T is an integer
+and represents the number of time steps between the initial counter
+time T0 and the current Unix time.
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+As mentioned in a previous errata, starting a sentence with<br>
+`Basically' is often considered bad form. Qualifiers such as<br>
+basically add nothing to the sentence and should generally be<br>
+avoided.
+</p>
+<hr>
+<!-- <pre>query_rejected: $query=
+SELECT e.`doc-id`, errata_id, title, `pub-date`,errata_type_code,
+             errata_status_code, submit_date, posted_date, verifier_id,
+             verifier_name, verifier_email, submitter_name, submitter_email,
+             orig_text, correct_text, e.notes, section, rs_code, e.insert_date,
+             e.update_date, conv_format_check, i.source,
+             submit_date, submitter_name, section, w.`ssp_id`
+      FROM errata e, errata_type_codes t , errata_status_codes s,
+           working_group w, area a, 
+           `index` i left join area_assignments n on i.internal_key = n.fk_index
+      WHERE e.`doc-id` = i.`doc-id` AND 
+            e.type_id=t.errata_type_id AND 
+            e.status_id=s.errata_status_id AND
+            i.source = w.wg_name AND
+            (a.area_name = w.area_name OR n.fk_area = a.area_id) AND e.`doc-id` = 'RFC6238' AND e.status_id = 9 GROUP BY errata_id ORDER BY i.`doc-id`, e.type_id DESC
+</pre> -->
+<!-- <p>No records found for status Rejected.</p> -->
+
+<p><a href="http://www.rfc-editor.org/errata.php#reportnew">Report New Errata</a></p>
+
+
+</body></html>

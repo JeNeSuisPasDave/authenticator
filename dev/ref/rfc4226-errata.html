@@ -1,0 +1,790 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+    <title>RFC Errata Report</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<script src="rfc4226-errata_files/validate_rfcsearch.js" type="text/javascript">
+</script>
+
+<link rel="stylesheet" href="rfc4226-errata_files/rfc-editor.css" type="text/css">
+<script>try {  for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){    var lastpass_f = document.forms[lastpass_iter];    if(typeof(lastpass_f.lpsubmitorig)=="undefined"){      if (typeof(lastpass_f.submit) == "function") {        lastpass_f.lpsubmitorig = lastpass_f.submit;        lastpass_f.submit = function(){          var form = this;          try {            if (document.documentElement && 'createEvent' in document)            {              var forms = document.getElementsByTagName('form');              for (var i=0 ; i<forms.length ; ++i)                if (forms[i]==form)                {                  var element = document.createElement('lpformsubmitdataelement');                  element.setAttribute('formnum',i);                  element.setAttribute('from','submithook');                  document.documentElement.appendChild(element);                  var evt = document.createEvent('Events');                  evt.initEvent('lpformsubmit',true,false);                  element.dispatchEvent(evt);                  break;                }            }          } catch (e) {}          try {            form.lpsubmitorig();          } catch (e) {}        }      }    }  }} catch (e) {}</script></head>
+<body>
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+          <tr>
+            <td height="87" valign="top" width="677">
+               <hr>
+               <a href="http://www.rfc-editor.org/errata.php">
+                  <img src="rfc4226-errata_files/header_rfcerrata.gif" alt="errata logo graphic" class="islink">
+               </a>
+            </td>
+          </tr>
+         <tr valign="top">
+         <td valign="top" width="677">
+          <hr>
+         </td>
+        </tr></tbody>
+     </table>
+
+        <noscript>
+           <p class="warning">
+These pages are designed to work with JavaScript enabled. Please
+enable JavaScript for this site.
+           </p>
+        </noscript>
+<!--
+create_adv_search_form: $criteria=
+array(3) {
+  ["presentation"]=>
+  string(7) "records"
+  ["rfc"]=>
+  string(4) "4226"
+  ["rec_status"]=>
+  string(3) "all"
+}
+
+$action=errata_search.php
+$for_edit=
+-->
+
+<form method="get" id="query" action="errata_search.php" onsubmit="return validateRFCSearchForm(this);">
+  <table class="search">
+     <tbody><tr class="sbar">
+       <th colspan="4">Errata Search</th>
+     </tr>
+     <tr class="ibar">
+       <td class="search_label_bold" colspan="2">
+         <label for="rfc"><abbr>RFC</abbr> Number:</label>
+         <input id="rfc" name="rfc" size="4" maxlength="4" value="4226" type="text">
+        </td>
+       <td class="search_label_bold" colspan="2">
+         <label for="eid">Errata <abbr>ID</abbr>:</label>
+         <input id="eid" name="eid" size="4" maxlength="4" type="text">
+       </td>
+     </tr>
+    <tr><td colspan="4">&nbsp;</td></tr>
+     <tr class="ibar">
+       <td style="text-decoration: underline;">Source of <abbr>RFC</abbr></td>
+
+       <td>&nbsp;</td>       <td><label for="rec_status">Status:</label></td>
+       <td class="userdata">
+           <select name="rec_status" id="rec_status"><!-- rec_status key in $criteria: all -->
+             <option selected="selected" value="15">All/Any</option>
+<option value="0">Verified+Reported</option>             <option value="1">Verified</option>
+             <option value="2">Reported</option>
+             <option value="3">Held for Document Update</option>
+             <option value="9">Rejected</option>
+           </select>
+       </td>
+     </tr>
+     <tr class="ibar">
+       <td><label for="area_acronym">Area Acronym:</label></td>
+       <td class="userdata">
+           <select name="area_acronym" id="area_acronym"><option value="" selected="selected">All/Any</option>
+             <option value="app">app</option>
+             <option value="gen">gen</option>
+             <option value="int">int</option>
+             <option value="ops">ops</option>
+             <option value="rai">rai</option>
+             <option value="rtg">rtg</option>
+             <option value="sec">sec</option>
+             <option value="tsv">tsv</option>
+            </select>
+       </td>
+       <td>
+          <label for="errata_type">Type:</label>
+       </td>
+       <td class="userdata">
+           <select name="errata_type" id="errata_type">
+             <option value="" selected="selected">All/Any</option>             <option value="1">Editorial</option>
+             <option value="2">Technical</option>
+           </select>
+        </td>
+     </tr>
+     <tr class="ibar">
+       <td>
+          <label for="wg_acronym">WG Acronym:</label>
+       </td>
+       <td class="userdata">
+          <input id="wg_acronym" size="6" name="wg_acronym" maxlength="10" type="text">
+         </td>
+       <td>
+          <label for="submitter_name">Submitter Name:</label>
+       </td>
+       <td class="userdata">
+          <input id="submitter_name" size="20" name="submitter_name" maxlength="60" type="text">
+       </td>
+     </tr>
+     <tr class="ibar">
+       <td>
+          <label for="stream_name">Other:</label>
+       </td>
+       <td class="userdata">
+          <select name="stream_name" id="stream_name"><option value="" selected="selected">All/Any</option>
+            <option value="IAB">IAB</option>
+            <option value="INDEPENDENT">INDEPENDENT</option>
+            <option value="IRTF">IRTF</option>
+            <option value="Legacy">Legacy</option>
+          </select>
+       </td>
+       <td>
+          <label for="submit_date">Date Submitted:</label>
+       </td>
+       <td class="userdata">
+          <input id="submit_date" size="8" name="submit_date" maxlength="10" type="text">
+       </td>
+     </tr>
+     <tr class="sbar">
+       <td colspan="4">
+         <div>
+        Summary Table<input name="presentation" id="presentationT" value="table" type="radio">
+        Full Records<input name="presentation" id="presentationR" checked="checked" value="records" type="radio">
+         </div>
+         <input value="Search" type="submit">
+         <input value="Reset Fields" onclick="return clearAdvSearchForm(document.forms.query);" type="button">
+       </td>
+     </tr>
+  </tbody></table>
+</form>
+<script type="text/javascript">
+<!--
+          document.forms.query.rfc.focus();
+//-->
+</script>
+<!-- 
+<h4>errata_adv_lookup driver</h4>
+<pre>$criteria:
+array(3) {
+  ["presentation"]=>
+  string(7) "records"
+  ["rfc"]=>
+  string(4) "4226"
+  ["rec_status"]=>
+  string(3) "all"
+}
+
+</pre> -->
+<!-- found_count: $count_query=
+string(478) "SELECT e.errata_id
+FROM errata e, errata_type_codes t , errata_status_codes s,
+           working_group w, area a, 
+           `index` i left join area_assignments n on i.internal_key = n.fk_index
+      WHERE e.`doc-id` = i.`doc-id` AND 
+            e.type_id=t.errata_type_id AND 
+            e.status_id=s.errata_status_id AND
+            i.source = w.wg_name AND
+            (a.area_name = w.area_name OR n.fk_area = a.area_id) AND e.`doc-id` = 'RFC4226' GROUP BY e.errata_id"
+
+-->
+<p>Found 12 records.</p>
+<!-- <pre>query_verified: $query=
+SELECT e.`doc-id`, errata_id, title, `pub-date`,errata_type_code,
+             errata_status_code, submit_date, posted_date, verifier_id,
+             verifier_name, verifier_email, submitter_name, submitter_email,
+             orig_text, correct_text, e.notes, section, rs_code, e.insert_date,
+             e.update_date, conv_format_check, i.source,
+             submit_date, submitter_name, section, w.`ssp_id`
+      FROM errata e, errata_type_codes t , errata_status_codes s,
+           working_group w, area a, 
+           `index` i left join area_assignments n on i.internal_key = n.fk_index
+      WHERE e.`doc-id` = i.`doc-id` AND 
+            e.type_id=t.errata_type_id AND 
+            e.status_id=s.errata_status_id AND
+            i.source = w.wg_name AND
+            (a.area_name = w.area_name OR n.fk_area = a.area_id) AND e.`doc-id` = 'RFC4226' AND e.status_id = 1 GROUP BY errata_id ORDER BY i.`doc-id`, e.type_id DESC
+</pre> -->
+<h2>Status: <a href="http://www.rfc-editor.org/status_type_desc.html">Verified</a> (1)</h2>
+<h2><a href="http://www.rfc-editor.org/rfc/rfc4226.txt" target="_blank">RFC4226</a>, "HOTP: An HMAC-Based One-Time Password Algorithm", December 2005</h2>
+<a href="http://www.rfc-editor.org/source_desc.html">Source of RFC</a>: IETF - NON WORKING GROUP<br>
+Area Assignment: sec<br>
+<p>
+Errata ID: 163<br><br>
+<b>Status: Verified<br>
+Type: Editorial<br>
+</b><br>
+Reported By: M'Raihi, David<br>
+Date Reported: 2005-12-26<br>
+</p>
+<p>Section 9 says:
+</p>
+<pre class="rfctext">   Oracle AuthO()
+   --------------
+      A = ALG(K,C)
+      C = C + 1
+      Return O to B
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">   Oracle AuthO()
+   --------------
+      A = ALG(K,C)
+      C = C + 1
+      Return A to B
+             ^^
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+<br>
+Section A.4.1, Paragraph 3, Lemma 1 definition, top of page 19<br>
+<br>
+The description of Lemma 1 defines P_ {N,m} (z) using the term Z_ {n}<br>
+and it should actually be Z_ {N}.<br>
+           P_{N,m}(z) = Pr [x mod m = z : x randomly pick in Z_{n}]<br>
+Should be:<br>
+           P_{N,m}(z) = Pr [x mod m = z : x randomly pick in Z_{N}]<br>
+                                                              ^^^<br>
+<br>
+Section E.2, Paragraph 4, bottom of page 32<br>
+    32^8 &gt; 10^12 so the security of an 8-alphanumeric HOTP code is<br>
+   significantly better than a 9-digit HOTP value.<br>
+Should be:<br>
+    32^8 &gt; 10^12 so the security of an 8-alphanumeric HOTP code is<br>
+   significantly better than a 12-digit HOTP value.<br>
+                               ^^<br>
+<br>
+In Author's Addresses, Page 35, David Naccache's contact information should be:<br>
+<br>
+    David Naccache<br>
+   ENS, DI<br>
+   45 rue d'Ulm<br>
+   75005 Paris, France<br>
+   and<br>
+   Information Security Group,<br>
+   Royal Holloway,<br>
+   University of London, Egham,<br>
+   Surrey TW20 0EX, UK<br>
+<br>
+   EMail: david.naccache@ens.fr, david.naccache@rhul.ac.uk<br>
+<br>
+
+</p>
+<hr>
+<!-- <pre>query_reported: $query=
+SELECT e.`doc-id`, errata_id, title, `pub-date`,errata_type_code,
+             errata_status_code, submit_date, posted_date, verifier_id,
+             verifier_name, verifier_email, submitter_name, submitter_email,
+             orig_text, correct_text, e.notes, section, rs_code, e.insert_date,
+             e.update_date, conv_format_check, i.source,
+             submit_date, submitter_name, section, w.`ssp_id`
+      FROM errata e, errata_type_codes t , errata_status_codes s,
+           working_group w, area a, 
+           `index` i left join area_assignments n on i.internal_key = n.fk_index
+      WHERE e.`doc-id` = i.`doc-id` AND 
+            e.type_id=t.errata_type_id AND 
+            e.status_id=s.errata_status_id AND
+            i.source = w.wg_name AND
+            (a.area_name = w.area_name OR n.fk_area = a.area_id) AND e.`doc-id` = 'RFC4226' AND e.status_id = 2 GROUP BY errata_id ORDER BY i.`doc-id`, e.type_id DESC
+</pre> -->
+<h2>Status: <a href="http://www.rfc-editor.org/status_type_desc.html">Reported</a> (3)</h2>
+<h2><a href="http://www.rfc-editor.org/rfc/rfc4226.txt" target="_blank">RFC4226</a>, "HOTP: An HMAC-Based One-Time Password Algorithm", December 2005</h2>
+<a href="http://www.rfc-editor.org/source_desc.html">Source of RFC</a>: IETF - NON WORKING GROUP<br>
+Area Assignment: sec<br>
+<p>
+Errata ID: 2404<br><br>
+<b>Status: Reported<br>
+Type: Technical<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Edited by: Sean Turner<br>
+Date Edited: 2010-07-30<br>
+</p>
+<p>Section A.3 says:
+</p>
+<pre class="rfctext">Still in Appendix A.3, the text on the upper half of page 19 contains
+a wrong (undefined) variable name 'O' which should be 'A' instead,
+and it should be adapted according to item (3) above.
+The text says:
+
+   Oracle AuthO()
+   --------------
+      A = ALG(K,C)
+      C = C + 1
+      Return O to B
+
+   Oracle VerO(A)
+   --------------
+      i = C
+      While (i &lt;= C + s - 1 and Win == FALSE) do
+         If A == ALG(K,i) then Win = TRUE; C = i + 1
+         Else i = i + 1
+      Return Win to B
+
+
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">It should say:
+
+   Oracle AuthO()
+   --------------
+      A = ALG(K,C)
+      C = C + 1
+|     Return A to B
+
+   Oracle VerO(A)
+   --------------
+|     i = C'
+|     While (i &lt;= C' + s - 1 and Win == FALSE) do
+|        If A == ALG(K,i) then Win = TRUE; C' = i + 1
+         Else i = i + 1
+      Return Win to B
+
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+another typo, and continuation of 2402 above
+</p>
+<hr>
+<p>
+Errata ID: 2401<br><br>
+<b>Status: Reported<br>
+Type: Technical<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Edited by: Sean Turner<br>
+Date Edited: 2010-07-30<br>
+</p>
+<p>Section A.1 says:
+</p>
+<pre class="rfctext">On page 17, Appendix A.1 contains the text:
+
+   Let IntDiv(a,b) denote the integer division algorithm that takes
+|  input integers a, b where a &gt;= b &gt;= 1 and returns integers (q,r)
+|
+   the quotient and remainder, respectively, of the division of a by b.
+   (Thus, a = bq + r and 0 &lt;= r &lt; b.)
+
+
+
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">The restriction  "a &gt;= b"  is not necessary and in fact inappropriate;
+the additional blank line seems to be an artifact of the editing
+process.  Thus, the above text should better read:
+
+   Let IntDiv(a,b) denote the integer division algorithm that takes
+|  input integers a, b where  b &gt;= 1  and returns integers (q,r), the
+   quotient and remainder, respectively, of the division of a by b.
+   (Thus, a = bq + r and 0 &lt;= r &lt; b.)
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+inappropriate restriction specified + formatting flaw
+</p>
+<hr>
+<p>
+Errata ID: 2405<br><br>
+<b>Status: Reported<br>
+Type: Technical<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Edited by: Sean Turner<br>
+Date Edited: 2010-07-30<br>
+</p>
+<p>Section A.4.1 says:
+</p>
+<pre class="rfctext">(6)  [ typos in mathematical text ]
+
+Lemma 1 and its proof in Appendis A.4.1, on page 20, contains
+several typos.
+
+In Lemma 1, the line,
+
+          P_{N,m}(z) = Pr [x mod m = z : x randomly pick in Z_{n}]
+                                                              ^^^
+should read:
+
+          P_{N,m}(z) = Pr [x mod m = z : x randomly pick in Z_{N}]
+
+This corrects the use of an undefined variable, n, by using the
+variable N as expected from the LHS term.
+
+In the Proof of Lemma 1, the case distinction for z contains an
+improper relational operator at two places.
+To adjust to the possible range of values (cf. item (2) above!),
+the formula parts:
+
+   P_{N,m}(z)  =  [ ... ]
+
+                = mq/N * 1/m +
+                   (N - mq)/N * 1 / (N - mq)     if 0 &lt;= z &lt; N - mq
+|                  0                             if N - mq &lt;= z &lt;= m
+                                                               ^^^^
+                = q/N +
+                   r/N * 1 / r                   if 0 &lt;= z &lt; N - mq
+|                  0                             if r &lt;= z &lt;= m
+                                                          ^^^^
+should be modified to read:
+
+   P_{N,m}(z)  =  [ ... ]
+
+                = mq/N * 1/m +
+                   (N - mq)/N * 1 / (N - mq)     if 0 &lt;= z &lt; N - mq
+|                  0                             if N - mq &lt;= z &lt; m
+
+                = q/N +
+                   r/N * 1 / r                   if 0 &lt;= z &lt; N - mq
+|                  0                             if r &lt;= z &lt; m
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">see above
+
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+typos
+</p>
+<hr>
+<!-- <pre>query_held: $query=
+SELECT e.`doc-id`, errata_id, title, `pub-date`,errata_type_code,
+             errata_status_code, submit_date, posted_date, verifier_id,
+             verifier_name, verifier_email, submitter_name, submitter_email,
+             orig_text, correct_text, e.notes, section, rs_code, e.insert_date,
+             e.update_date, conv_format_check, i.source,
+             submit_date, submitter_name, section, w.`ssp_id`
+      FROM errata e, errata_type_codes t , errata_status_codes s,
+           working_group w, area a, 
+           `index` i left join area_assignments n on i.internal_key = n.fk_index
+      WHERE e.`doc-id` = i.`doc-id` AND 
+            e.type_id=t.errata_type_id AND 
+            e.status_id=s.errata_status_id AND
+            i.source = w.wg_name AND
+            (a.area_name = w.area_name OR n.fk_area = a.area_id) AND e.`doc-id` = 'RFC4226' AND e.status_id = 3 GROUP BY errata_id ORDER BY i.`doc-id`, e.type_id DESC
+</pre> -->
+<h2>Status: <a href="http://www.rfc-editor.org/status_type_desc.html">Held for Document Update</a> (8)</h2>
+<h2><a href="http://www.rfc-editor.org/rfc/rfc4226.txt" target="_blank">RFC4226</a>, "HOTP: An HMAC-Based One-Time Password Algorithm", December 2005</h2>
+<a href="http://www.rfc-editor.org/source_desc.html">Source of RFC</a>: IETF - NON WORKING GROUP<br>
+Area Assignment: sec<br>
+<p>
+Errata ID: 2406<br><br>
+<b>Status: Held for Document Update<br>
+Type: Technical<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Held for Document Update by: Tim Polk<br>
+Date Held: 2011-03-27<br>
+</p>
+<p>Appendix A.4.3 says:</p>
+<pre class="rfctext">   Proposition 2 ------------- Suppose m = 10^Digit &lt; 2^31, and let
+   (q,r) = IntDiv(2^31,m).  Let B be any adversary attacking HOTP-IDEAL
+   using v verification oracle queries and a &lt;= 2^c - s authenticator
+   oracle queries.  Then [...]
+
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">  Proposition 2
+  -------------
+
+  Suppose m = 10^Digit &lt; 2^31, and let (q,r) = IntDiv(2^31,m).  Let B
+  be any adversary attacking HOTP-IDEAL using v verification oracle
+  queries and a &lt;= 2^c - s authenticator oracle queries.  Then  [...]
+</pre>
+<hr>
+<p>
+Errata ID: 2408<br><br>
+<b>Status: Held for Document Update<br>
+Type: Technical<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Held for Document Update by: Sean Turner<br>
+Date Held: 2010-07-30<br>
+</p>
+<p>Section C says:
+</p>
+<pre class="rfctext">In Appendix C, the source text in the upper half of page 28
+contains an improperly formatted comment -- obviously intended
+to illustrate the subsequent declaration, the comment must be
+aligned with that declaration.
+Thus, the lines:
+
+       // These are used to calculate the check-sum digits.
+|      //                                0  1  2  3  4  5  6  7  8  9
+       private static final int[] doubleDigits =
+                       { 0, 2, 4, 6, 8, 1, 3, 5, 7, 9 };
+
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">should read:
+
+       // These are used to calculate the check-sum digits.
+|      //                0  1  2  3  4  5  6  7  8  9
+       private static final int[] doubleDigits =
+                       { 0, 2, 4, 6, 8, 1, 3, 5, 7, 9 };
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+formatting
+</p>
+<hr>
+<p>
+Errata ID: 834<br><br>
+<b>Status: Held for Document Update<br>
+Type: Technical<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Held for Document Update by: Sean Turner<br>
+Date Held: 2010-07-30<br>
+</p>
+<p>Section E.4 says:
+</p>
+<pre class="rfctext">The enumeration in Appendix E.4, on page 34, contains inconsistent
+variable namings (cf. issue (3) above!).
+To make it self-consistent, the enumeration:
+
+   1) C-client &gt;= C-server
+   2) C-client - C-server &lt;= s
+   3) Check that HOTP client is valid HOTP(K,C-Client)
+   4) If true, the server sets C to C-client + 1 and client is
+      authenticated                           ^^^
+                              ^^^             ^^^
+
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">should read:
+
+   1) C-client &gt;= C-server
+   2) C-client - C-server &lt;= s
+|  3) Check that HOTP client is valid HOTP(K,C-client)
+|  4) If true, the server sets C-server to C-client + 1 and client is
+      authenticated
+
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+Lines up with errata 2402
+</p>
+<hr>
+<p>
+Errata ID: 2402<br><br>
+<b>Status: Held for Document Update<br>
+Type: Technical<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Held for Document Update by: Sean Turner<br>
+Date Held: 2010-07-30<br>
+</p>
+<p>Section A.3 says:
+</p>
+<pre class="rfctext">In Appendix A.3, unfortunately the necessary distinction between
+the counter value kept with the user and the counter value kept
+at the server is not preserved in the variable names introduced.
+This leads to significant confusion.
+
+I hereby propose a 'minimally invasive' text modification as
+follows (Cf. Appendix E.3 for another notation) :
+
+The text of the 2nd and 3rd paragraph of Appendix A.3, on page 18 :
+
+   The scenario we are considering is that a user and server share a key
+   K for ALG.  Both maintain a counter C, initially zero, and the user
+   authenticates itself by sending ALG(K,C) to the server.  The latter
+   accepts if this value is correct.
+
+   In order to protect against accidental increment of the user counter,
+   the server, upon receiving a value z, will accept as long as z equals
+   ALG(K,i) for some i in the range C,...,C + s-1, where s is the
+   resynchronization parameter and C is the server counter.  If it
+   accepts with some value of i, it then increments its counter to i+1.
+   If it does not accept, it does not change its counter value.
+
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">
+should be modified to say:
+
+   The scenario we are considering is that a user and server share a key
+|  K for ALG.  Both maintain a counter C and C', respectively, initially
+   zero, and the user authenticates itself by sending ALG(K,C) to the
+   server.  The latter accepts if this value is correct.
+
+   In order to protect against accidental increment of the user counter,
+   the server, upon receiving a value z, will accept as long as z equals
+|  ALG(K,i) for some i in the range C',...,C' + s-1, where s is the
+|  resynchronization parameter and C' is the server counter.  If it
+   accepts with some value of i, it then increments its counter to i+1.
+   If it does not accept, it does not change its counter value.
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+conflicting naming of variables
+</p>
+<hr>
+<p>
+Errata ID: 2400<br><br>
+<b>Status: Held for Document Update<br>
+Type: Editorial<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Held for Document Update by: Sean Turner<br>
+Date Held: 2010-07-30<br>
+</p>
+<p>Section 5.3 says:
+</p>
+<pre class="rfctext">The text of Section 5.3, in the 2nd and 3rd paragraph on page 7,
+says:
+
+   The reason for masking the most significant bit of P is to avoid
+   confusion about signed vs. unsigned modulo computations.  Different
+   processors perform these operations differently, and masking out the
+|  signed bit removes all ambiguity.
+       ^^
+   Implementations MUST extract a 6-digit code at a minimum and possibly
+   7 and 8-digit code.  Depending on security requirements, Digit = 7 or
+   more SHOULD be considered in order to extract a longer HOTP value.
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">
+It should say:
+
+   The reason for masking the most significant bit of P is to avoid
+   confusion about signed vs. unsigned modulo computations.  Different
+   processors perform these operations differently, and masking out the
+|  sign bit removes all ambiguity.
+
+   Implementations MUST extract a 6-digit code at a minimum and possibly
+|  7 and 8-digit codes.  Depending on security requirements, Digit = 7
+   or more SHOULD be considered in order to extract a longer HOTP value.
+
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+Editorial fixes.
+</p>
+<hr>
+<p>
+Errata ID: 2403<br><br>
+<b>Status: Held for Document Update<br>
+Type: Editorial<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Held for Document Update by: Sean Turner<br>
+Date Held: 2010-07-30<br>
+</p>
+<p>Section A.3 says:
+</p>
+<pre class="rfctext">Near the bottom of page 18, the 2nd-to-last paragraph of Appendix A.3
+(on that page) says:
+
+                                                    ...  It wins if the
+   server accepts this accumulator.
+                       ^^^^^^^^^^^
+
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">It should say instead:
+
+                                                    ...  It wins if the
+   server accepts this authenticator.
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+typo
+</p>
+<hr>
+<p>
+Errata ID: 2407<br><br>
+<b>Status: Held for Document Update<br>
+Type: Editorial<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Held for Document Update by: Sean Turner<br>
+Date Held: 2010-07-30<br>
+</p>
+<p>Section A.5 says:
+</p>
+<pre class="rfctext">Within Appendix A.5, in the lower half of page 23, the text for
+"Assumption 1" says:
+
+   Let T denotes the time to perform one computation of H.  [...]
+               ^
+
+</pre>
+<p>It should say:</p>
+<pre class="rfctext">It should say:
+
+   Let T denote the time to perform one computation of H.  [...]
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+typo
+</p>
+<hr>
+<p>
+Errata ID: 2409<br><br>
+<b>Status: Held for Document Update<br>
+Type: Editorial<br>
+</b><br>
+Reported By: Alfred Hoenes<br>
+Date Reported: 2006-01-18<br>
+Held for Document Update by: Sean Turner<br>
+Date Held: 2010-07-30<br>
+</p>
+<p>Section C says:
+</p>
+<pre class="rfctext">In Appendix C, the source code on page 30 (lower half) and
+page 31 contains improperly indented lines.
+
+The following three line groups should be indented by 6 more character
+positions to make them conformant to RFC style 'nice' format:
+
+- on page 30:
+
+     String result = null;
+     int digits = addChecksum ? (codeDigits + 1) : codeDigits;
+
+- on page 30:
+
+     if ( (0&lt;=truncationOffset) &amp;&amp;
+            (truncationOffset&lt;(hash.length-4)) ) {
+         offset = truncationOffset;
+     }
+
+- on page 31:
+
+     if (addChecksum) {
+         otp =  (otp * 10) + calcChecksum(otp, codeDigits);
+     }
+     result = Integer.toString(otp);
+     while (result.length() &lt; digits) {
+         result = "0" + result;
+     }
+     return result;
+</pre>
+<p>It should say:</p>
+<pre class="rfctext"> [see above]
+</pre>
+<p>Notes:</p>
+<p class="simpleindent">
+[ further formatting (indentation) issues ]
+</p>
+<hr>
+<!-- <pre>query_rejected: $query=
+SELECT e.`doc-id`, errata_id, title, `pub-date`,errata_type_code,
+             errata_status_code, submit_date, posted_date, verifier_id,
+             verifier_name, verifier_email, submitter_name, submitter_email,
+             orig_text, correct_text, e.notes, section, rs_code, e.insert_date,
+             e.update_date, conv_format_check, i.source,
+             submit_date, submitter_name, section, w.`ssp_id`
+      FROM errata e, errata_type_codes t , errata_status_codes s,
+           working_group w, area a, 
+           `index` i left join area_assignments n on i.internal_key = n.fk_index
+      WHERE e.`doc-id` = i.`doc-id` AND 
+            e.type_id=t.errata_type_id AND 
+            e.status_id=s.errata_status_id AND
+            i.source = w.wg_name AND
+            (a.area_name = w.area_name OR n.fk_area = a.area_id) AND e.`doc-id` = 'RFC4226' AND e.status_id = 9 GROUP BY errata_id ORDER BY i.`doc-id`, e.type_id DESC
+</pre> -->
+<!-- <p>No records found for status Rejected.</p> -->
+
+<p><a href="http://www.rfc-editor.org/errata.php#reportnew">Report New Errata</a></p>
+
+
+</body></html>

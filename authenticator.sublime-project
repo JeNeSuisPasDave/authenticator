@@ -1,0 +1,13 @@
+{
+	"folders":
+	[
+		{
+			"name": "CLI Authenticator",
+			"path": ".",
+			"folder_exclude_patterns": [
+				"__pycache__", 
+				"venv2*", "venv3*",
+				".git"]
+		}
+	]
+}

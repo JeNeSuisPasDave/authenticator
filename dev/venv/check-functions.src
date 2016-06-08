@@ -1,0 +1,239 @@
+# check_installed()
+#
+# A function to check whether a particular Python package
+# has been installed.
+#
+# First argument is the name of the package
+#
+# Outputs "1" if installed; otherwise "0"
+#
+check_installed() {
+
+  # Make sure needed arguments got passed
+  #
+  if [ -z "$1" ]; then
+    echo "ERROR: missing package name 'check_installed()'."
+    return 0
+  fi
+  if [ ! -z "$2" ]; then
+    echo "ERROR: too many arguments for 'check_installed()'."
+    return 0
+  fi
+
+  # Capture arguments
+  #
+  local PKG_=$1
+
+  # Check the version
+  #
+  local OK_=1
+  local PKG_INSTALLED_=`echo "${PKGS_}" | grep "^${PKG_} (" | wc -l | tr -d [[:space:]]`
+  if [ 0 == ${PKG_INSTALLED_} ]; then
+    OK_=0
+  fi
+
+  # Get out
+  #
+  echo ${OK_}
+  return 0
+}
+
+# check_installed_version()
+#
+# A function to check whether a particular version of a Python package
+# has been installed.
+#
+# First argument is the name of the package
+# Second argument is the expected version number string.
+# Third argument is the maximum version number string (actual version must
+#     be less than this)
+#
+# Outputs "" if OK, or full version if not OK.
+#
+check_installed_version() {
+
+  # Make sure needed arguments got passed
+  #
+  if [ -z "$1" ]; then
+    echo "ERROR: missing package name 'check_installed_version()'."
+    return 0
+  fi
+  if [ -z "$2" ]; then
+    echo "ERROR: missing expected version for 'check_installed_version()'."
+    return 0
+  fi
+  if [ -z "$3" ]; then
+    echo -n "ERROR: missing upper limit on version for "
+    echo "'check_installed_version()'."
+    return 0
+  fi
+  if [ ! -z "$4" ]; then
+    echo "ERROR: too many arguments for 'check_installed_version()'."
+    return 0
+  fi
+
+  # Capture arguments
+  #
+  local PKG_=$1
+  local EXP_=$2
+  local MAX_=$3
+
+  # Check whether installed
+  #
+  local OK_=""
+  local PKG_INSTALLED_=`echo "${PKGS_}" | grep "^${PKG_} (" | wc -l | tr -d [[:space:]]`
+  if [ 0 == ${PKG_INSTALLED_} ]; then
+    OK_="0.0.0"
+    echo ${OK_}
+    return 0
+  fi
+
+  # Check the version
+  #
+  local FULL_VSN_=`echo "${PKGS_}" | grep "^${PKG_} (" | sed -E 's/^.+\(([^\)]+)\)/\1/'`
+  local VSN_MIN_OK_=`version_is_at_least "${EXP_}" "${FULL_VSN_}"`
+  local VSN_MAX_OK_=`version_is_less_than "${MAX_}" "${FULL_VSN_}"`
+  if (( 0 == ${VSN_MIN_OK_} )) \
+    || (( 0 == ${VSN_MAX_OK_} )); then
+    OK_="${FULL_VSN_}"
+  fi
+
+  # Get out
+  #
+  echo ${OK_}
+  return 0
+}
+
+# version_is_at_least()
+#
+# A function to extract a version from a string and check that it
+# meets or exceeds an expected version.
+#
+# First argument is the expected version number string.
+# Second argument is the string containing a version number.
+#
+version_is_at_least() {
+  # Make sure an expected version string got passed
+  #
+  if [ -z "$1" ]; then
+    echo "ERROR: missing expected version for 'version_is_at_least()'."
+    return 0
+  fi
+  if [ -z "$2" ]; then
+    echo "ERROR: missing actual version for 'version_is_at_least()'."
+    return 0
+  fi
+  if [ ! -z "$3" ]; then
+    echo "ERROR: too many arguments for 'version_is_at_least()'."
+    return 0
+  fi
+
+  EXP_=$1
+  ACT_=$2
+
+  # Tokenize the expected version
+  #
+  RE_='s/^[^0-9]*([0-9]+)[^0-9]*.*$/\1/'
+  EXP_MAJOR_=`echo -n $EXP_.0.0.0.0 | sed -E ${RE_}`
+  RE_='s/^[^0-9]*[0-9]+\.([0-9]+)[^0-9]*.*$/\1/'
+  EXP_MINOR_=`echo -n $EXP_.0.0.0.0 | sed -E ${RE_}`
+  RE_='s/^[^0-9]*[0-9]+\.[0-9]+\.([0-9]+)[^0-9]*.*$/\1/'
+  EXP_PATCH_=`echo -n $EXP_.0.0.0.0 | sed -E ${RE_}`
+
+  # Tokenize the actual version
+  #
+  RE_='s/^[^0-9]*([0-9]+)[^0-9]*.*$/\1/'
+  ACT_MAJOR_=`echo -n $ACT_.0.0.0.0 | sed -E ${RE_}`
+  RE_='s/^[^0-9]*[0-9]+\.([0-9]+)[^0-9]*.*$/\1/'
+  ACT_MINOR_=`echo -n $ACT_.0.0.0.0 | sed -E ${RE_}`
+  RE_='s/^[^0-9]*[0-9]+\.[0-9]+\.([0-9]+)[^0-9]*.*$/\1/'
+  ACT_PATCH_=`echo -n $ACT_.0.0.0.0 | sed -E ${RE_}`
+
+  # Test the actual versus expected version. If actual is >= expected
+  # then return 1; else, return 0.
+  #
+  OK_=1
+  if (( ${EXP_MAJOR_} > ${ACT_MAJOR_} )); then
+    OK_=0
+  elif (( ${EXP_MAJOR_} == ${ACT_MAJOR_} )); then
+    if (( ${EXP_MINOR_} > ${ACT_MINOR_} )); then
+      OK_=0
+    elif (( ${EXP_MINOR_} == ${ACT_MINOR_} )); then
+      if (( ${EXP_PATCH_} > ${ACT_PATCH_} )); then
+        OK_=0
+      fi
+    fi
+  fi
+
+  # Get out
+  #
+  echo ${OK_}
+  return 0
+}
+
+# version_is_less_than()
+#
+# A function to extract a version from a string and check that it
+# is below maximum version.
+#
+# First argument is the maximum version number string.
+# Second argument is the string containing a version number to test.
+#
+version_is_less_than() {
+  # Make sure an maximum version string got passed
+  #
+  if [ -z "$1" ]; then
+    echo "ERROR: missing maximum version for 'version_is_less_than()'."
+    return 0
+  fi
+  if [ -z "$2" ]; then
+    echo "ERROR: missing actual version for 'version_is_less_than()'."
+    return 0
+  fi
+  if [ ! -z "$3" ]; then
+    echo "ERROR: too many arguments for 'version_is_less_than()'."
+    return 0
+  fi
+
+  MAX_=$1
+  ACT_=$2
+
+  # Tokenize the expected version
+  #
+  RE_='s/^[^0-9]*([0-9]+)[^0-9]*.*$/\1/'
+  MAX_MAJOR_=`echo -n $MAX_.0.0.0.0 | sed -E ${RE_}`
+  RE_='s/^[^0-9]*[0-9]+\.([0-9]+)[^0-9]*.*$/\1/'
+  MAX_MINOR_=`echo -n $MAX_.0.0.0.0 | sed -E ${RE_}`
+  RE_='s/^[^0-9]*[0-9]+\.[0-9]+\.([0-9]+)[^0-9]*.*$/\1/'
+  MAX_PATCH_=`echo -n $MAX_.0.0.0.0 | sed -E ${RE_}`
+
+  # Tokenize the actual version
+  #
+  RE_='s/^[^0-9]*([0-9]+)[^0-9]*.*$/\1/'
+  ACT_MAJOR_=`echo -n $ACT_.0.0.0.0 | sed -E ${RE_}`
+  RE_='s/^[^0-9]*[0-9]+\.([0-9]+)[^0-9]*.*$/\1/'
+  ACT_MINOR_=`echo -n $ACT_.0.0.0.0 | sed -E ${RE_}`
+  RE_='s/^[^0-9]*[0-9]+\.[0-9]+\.([0-9]+)[^0-9]*.*$/\1/'
+  ACT_PATCH_=`echo -n $ACT_.0.0.0.0 | sed -E ${RE_}`
+
+  # Test the actual versus maximum version. If actual is >= maximum
+  # then return 1; else, return 0.
+  #
+  OK_=0
+  if (( ${MAX_MAJOR_} > ${ACT_MAJOR_} )); then
+    OK_=1
+  elif (( ${MAX_MAJOR_} == ${ACT_MAJOR_} )); then
+    if (( ${MAX_MINOR_} > ${ACT_MINOR_} )); then
+      OK_=1
+    elif (( ${MAX_MINOR_} == ${ACT_MINOR_} )); then
+      if (( ${MAX_PATCH_} > ${ACT_PATCH_} )); then
+        OK_=1
+      fi
+    fi
+  fi
+
+  # Get out
+  #
+  echo ${OK_}
+  return 0
+}

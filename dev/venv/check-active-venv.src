@@ -1,0 +1,44 @@
+# NOTE: expect that this is preceded by:
+# source check-functions.src
+#
+
+VENV_DIRNAME_=venv35
+PYTHON_EXP_VSN_=3.5
+PYTHON_MAX_VSN_=3.6
+
+# Check whether we are running in a python virtual environment
+#
+VENV_RUNNING_=`env | grep VIRTUAL_ENV | wc -l | tr -d [[:space:]]`
+if [ 0 == ${VENV_RUNNING_} ]; then
+  echo
+  echo "ERROR: Python virtual environment not running"
+  echo
+  echo "Try '. ${VENV_DIRNAME_}/bin/activate' to start the virtual environment,"
+  echo "and then try '${SCRIPTNAME_}' again."
+  echo
+  exit 2
+fi
+
+# Check whether we are running Python 3.5
+#
+PYTHON_DOWNLOAD_LOC_="https://www.python.org/"
+PYTHON_FULL_VSN_=`python --version  2>&1 | grep "Python [0-9]"`
+if [ -z "${PYTHON_FULL_VSN_}" ]; then
+  echo
+  echo "ERROR: Python is not installed or not in the path."
+  echo
+  echo "Install Python; perhaps from ${PYTHON_DOWNLOAD_LOC_}"
+  echo
+  exit 4
+fi
+PYTHON_VSN_MIN_OK_=`version_is_at_least "${PYTHON_EXP_VSN_}" "${PYTHON_FULL_VSN_}"`
+PYTHON_VSN_MAX_OK_=`version_is_less_than "${PYTHON_MAX_VSN_}" "${PYTHON_FULL_VSN_}"`
+if (( 0 == ${PYTHON_VSN_MIN_OK_} )) \
+  || (( 0 == ${PYTHON_VSN_MAX_OK_} )); then
+  echo
+  echo -n "ERROR: Expecting Python ${PYTHON_EXP_VSN_} or later, "
+  echo "up to ${PYTHON_MAX_VSN_}."
+  echo "Found ${PYTHON_FULL_VSN_}"
+  echo
+  exit 6
+fi

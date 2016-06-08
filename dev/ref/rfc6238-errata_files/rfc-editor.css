@@ -1,0 +1,179 @@
+/*
+ This is the style sheet used for the publicly accessible errata
+ query and reporting application. It attempts to re-create the
+ look of the existing RFC Editor HTML web site and CGI-driven
+ errata reporting system.
+*/
+body { background: rgb(255,255,255); 
+/*       font-size: medium; */
+       font-size: 1em; 
+       width: 677px;
+       margin: 0em;
+       margin-left: 2%;
+}
+
+table tr.header { border: 1px solid black; }
+table tr.odd { border: 1px solid black;
+               background: rgb(245,235,235); }
+table tr.even { border: 1px solid black;
+                background: rgb(235,245,245); }
+
+img.header { margin-bottom: 20px; margin-top: 30px;}
+
+table.nav { /*background: #0000FF;*/
+            background: white;
+            /*color: #FFFFFF;*/
+            border: 1px solid #CCCCCC;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+            text-align: center;
+}
+
+td { padding: 2px; border: 1px solid white; }
+
+td.nav { padding: 2px; border: 1px solid #CCCCCC; }
+
+div.navcell { background-color: #0000FF;
+              color: #FFFFFF;
+}
+
+h1 h2 h3 h4 h5 h6 {  
+	font-family: arial, verdana, geneva, sans-serif;
+	color: #000000; 
+	background-color: #FFFFFF;
+}
+
+.warning { color: red; }
+
+.error { font-weight: bold; color: red; }
+
+.maintitle { text-align: center;
+             font-variant: small-caps;
+             background-color: inherit;
+           }
+
+img.islink { border-color: transparent; }
+
+a         { /*text-decoration: none;*/
+	    border-color: transparent;
+	    background-color: transparent; 
+	    /*color: #000000;*/}
+
+a.white   { /*text-decoration: none; */
+	    border-color: transparent;
+	    background-color: transparent; 
+	    color: #FFF;}
+a.white:link    { background-color: inherit; color:#FFF; }
+a.white:visited { background-color: inherit; color: #CCC; }
+a.white:hover   { background-color: inherit; color: #FF3; }
+a.white:active  { background-color: inherit; color: #F39; }
+
+.helpbox { visibility: hidden;
+           left: 440px;
+           top: 280px;
+           width: 400px;
+           position: absolute;
+           border: 2px solid #FFFF00;
+           background-color: #0000FF; /* bright blue */
+           color: #FFFFFF;
+/*           border: 2px solid black;
+           background-color: #99FF66; / * light green */
+           }
+
+.rfctext { font-family: "Courier New", Courier, "Andale Mono", Monaco, monospace;
+           white-space: pre;
+           margin-left: 2em;
+         }
+
+.legacytext { font-family: "Courier New", Courier, "Andale Mono", Monaco, monospace;
+              white-space: pre;
+              margin-left: 2em;
+            }
+
+.simpleindent { margin-left: 2em; }
+
+/*
+ * Used by advanced errata search form
+ */
+.search { margin-left: 10%;
+          text-align: left;
+          background: white;
+          border-color: transparent;
+/*          border-style: none; */
+        }
+
+tr.ibar { background-color: white;
+        }
+
+.search_label {text-align: left;
+               border-style: none;
+              }
+
+.search_label_bold { text-align: left;
+                     border-style: none;
+                     font-weight: bold;
+                   }
+
+.userdata { text-align: right;
+            border-style: none;
+          }
+
+tr.sbar { background-color: silver;
+          text-align: center;
+        }
+/*
+ * Used by errata record status counts summary table
+  */
+table.status_summary { font-family: arial, verdana, geneva, sans-serif;
+                       margin-left: 5%;
+                     }
+
+thead.status_head { font-variant: small-caps;
+                    font-weight: bold;
+                   }
+
+tbody.status_body { font-variant: normal;
+                    font-weight: normal;
+                    text-align: left;
+                  }
+td.status_head { text-decoration: underline;
+               }
+
+td.status_count { text-align: right; }
+
+
+table.subseries { /*background: #0000FF;*/
+            background: white;
+            /*color: #FFFFFF;*/
+            border: 1px solid black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+            text-align: center;
+	    border-collapse:collapse;	
+}
+
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+
+

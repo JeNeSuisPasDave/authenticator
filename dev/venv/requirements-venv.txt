@@ -1,0 +1,28 @@
+# key packages:
+#  cryptography 1.4
+#  iso8601 0.1.11
+#
+cffi==1.6.0
+cryptography==1.4
+idna==2.1
+iso8601==0.1.11
+pyasn1==0.1.9
+pycparser==2.14
+six==1.10.0
+
+# lint packages
+#
+flake8==2.5.4
+mccabe==0.4.0
+pep257==0.7.0
+pep8==1.7.0
+pep8-naming==0.3.3
+pyflakes==1.0.0
+
+# distribution packages
+#
+pkginfo==1.3.2
+requests==2.10.0 
+requests-toolbelt==0.6.2 
+twine==1.6.5
+wheel==0.29.0
