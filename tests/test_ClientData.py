@@ -320,6 +320,9 @@ class CoreClientDataTests(unittest.TestCase):
         cut = ClientData(**args)
         expected = datetime(
             1, 1, 1, 0, 0, 0, 0, self.__utz).strftime(self.isoFmt)
+        # Fix issue on some systems, e.g. Debian, where %Y doesn't zero-pad
+        if expected[0:3] != "000":
+            expected = "000" + expected
         self.assertEqual(expected, cut.last_count_update_time())
         # unix epoch time
         #

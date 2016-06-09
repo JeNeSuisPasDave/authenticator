@@ -12,8 +12,8 @@ pushd src > /dev/null
 
 # Register the project
 #
-twine register -r pypitest dist/authenticator-1.1.1.tar.gz
-twine register -r pypitest dist/authenticator-1.1.1-py3-none-any.whl
+twine register -r pypitest dist/authenticator-1.1.2.tar.gz
+twine register -r pypitest dist/authenticator-1.1.2-py3-none-any.whl
 # python setup.py register -r https://testpypi.python.org/pypi
 
 popd > /dev/null

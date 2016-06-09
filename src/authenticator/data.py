@@ -228,6 +228,10 @@ class ClientData:
 
         self.__last_count_update_time = datetime(
             1, 1, 1, 0, 0, 0, 0, ClientData.utz()).strftime(self._isoFmt)
+        # Fix issue on some systems, e.g. Debian, where %Y doesn't zero-pad
+        if self.__last_count_update_time[0:3] != "000":
+            self.__last_count_update_time = "000" + \
+                self.__last_count_update_time
         if 'lastCountUpdateTime' in kw_args:
             t = datetime.min
             v = kw_args['lastCountUpdateTime']
@@ -242,6 +246,17 @@ class ClientData:
             if t.tzinfo is None:
                 t = t.replace(tzinfo=ClientData.utz())
             self.__last_count_update_time = t.strftime(self._isoFmt)
+            # Fix issue on some systems, e.g. Debian, where %Y doesn't zero-pad
+            tpadding = ""
+            if 10 > t.year:
+                tpadding = "000"
+            elif 100 > t.year:
+                tpadding = "00"
+            elif 1000 > t.year:
+                tpadding = "0"
+            if "0" != self.__last_count_update_time[0:1]:
+                self.__last_count_update_time = tpadding + \
+                    self.__last_count_update_time
 
     def _init_period(self, kw_args):
         """Process kw_arg period."""
@@ -482,6 +497,17 @@ class ClientData:
 
         if isinstance(update_time, datetime):
             self.__last_count_update_time = update_time.strftime(self._isoFmt)
+            # Fix issue on some systems, e.g. Debian, where %Y doesn't zero-pad
+            tpadding = ""
+            if 10 > update_time.year:
+                tpadding = "000"
+            elif 100 > update_time.year:
+                tpadding = "00"
+            elif 1000 > update_time.year:
+                tpadding = "0"
+            if "0" != self.__last_count_update_time[0:1]:
+                self.__last_count_update_time = tpadding + \
+                    self.__last_count_update_time
         else:
             self.__last_count_update_time = update_time
 

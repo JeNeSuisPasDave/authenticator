@@ -12,7 +12,7 @@ pushd src > /dev/null
 
 # Register the project
 #
-twine register -r pypi dist/authenticator-1.1.1.tar.gz
-twine register -r pypi dist/authenticator-1.1.1-py3-none-any.whl
+twine register -r pypi dist/authenticator-1.1.2.tar.gz
+twine register -r pypi dist/authenticator-1.1.2-py3-none-any.whl
 
 popd > /dev/null
