@@ -48,6 +48,11 @@ TWINE_MAX_VSN_=1.6.6
 WHEEL_EXP_VSN_=0.29.0
 WHEEL_MAX_VSN_=0.29.1
 
+# For packaging EXE distributions
+#
+PYINSTALLER_EXP_VSN_=3.2.0
+PYINSTALLER_MAX_VSN_=3.2.1
+
 check_dependent_version() {
   local PKG_=$1
   local EXP_=$2
@@ -220,6 +225,14 @@ if (( 0 != $? )); then
 fi
 
 check_dependent_version "wheel" "${WHEEL_EXP_VSN_}" "${WHEEL_MAX_VSN_}"
+if (( 0 != $? )); then
+  for s in "${check_dependent_version[@]}"; do
+    printf "%s\n" "$s"
+  done
+  exit 8
+fi
+
+check_dependent_version "wheel" "${PYINSTALLER_EXP_VSN_}" "${PYINSTALLER_MAX_VSN_}"
 if (( 0 != $? )); then
   for s in "${check_dependent_version[@]}"; do
     printf "%s\n" "$s"

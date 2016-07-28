@@ -48,6 +48,11 @@ $twineMaxVsn_ = Extract-Version "1.6.6"
 $wheelExpectedVsn_ = Extract-Version "0.29.0"
 $wheelMaxVsn_ = Extract-Version "0.29.1"
 
+# For creating EXE packages
+#
+$pyinstallerExpectedVsn_ = Extract-Version "3.2.0"
+$pyinstallerMaxVsn_ = Extract-Version "3.2.1"
+
 <#
 .SYNOPSIS
 Check whether the Python package is installed and, if so, whether it is
@@ -303,6 +308,16 @@ If (0 -lt $msg_.Count) {
 #
 $msg_ = Check-DependentVersion "wheel" -MinVersion $wheelExpectedVsn_ `
     -MaxVersion $wheelMaxVsn_ -PipPackages $pkgs_
+If (0 -lt $msg_.Count) {
+    Write-Output $( $msg_ -Join "`n" )
+    $errcode_ = 8
+    Exit
+}
+
+# Check whether PyInstaller installed
+#
+$msg_ = Check-DependentVersion "PyInstaller" -MinVersion $pyinstallerExpectedVsn_ `
+    -MaxVersion $pyinstallerMaxVsn_ -PipPackages $pkgs_
 If (0 -lt $msg_.Count) {
     Write-Output $( $msg_ -Join "`n" )
     $errcode_ = 8

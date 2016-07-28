@@ -124,8 +124,7 @@ setup(
     #
     entry_points={
         'console_scripts': [
-            'authenticator=authenticator.cli:authenticator_command',
-            'sample=sample:main',
+            'authenticator=authenticator.cli:authenticator_command'
         ],
     },
 )
