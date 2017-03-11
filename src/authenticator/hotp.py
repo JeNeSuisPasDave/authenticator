@@ -185,6 +185,15 @@ class HOTP:
         import base64
         import binascii
 
+        # Pad the base32 string to a multiple of 8 characters
+        #
+        secret_length = len(base32_secret_key)
+        pad_length = (8 - (secret_length % 8)) % 8
+        pad = "=" * pad_length
+        base32_secret_key = base32_secret_key + pad
+
+        # Decode it
+        #
         try:
             secret_key = base64.b32decode(base32_secret_key)
         except binascii.Error:

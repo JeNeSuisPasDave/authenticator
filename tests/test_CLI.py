@@ -1246,65 +1246,6 @@ class CoreCLITests(unittest.TestCase):
 
     @unittest.mock.patch('authenticator.data.ClientFile._get_key_stretches')
     @unittest.mock.patch('os.path.expanduser')
-    def test_prompt_add_time_based_hotp_wrong_length_secret(
-            self, mock_expanduser, mock_key_stretches):
-        """Test CLI.Prompt().
-
-        At first supply a shared secret that is an invalid length for a base32
-        string, but then supply a correct base32 string.
-
-        """
-        mock_key_stretches.return_value = 64
-        mock_expanduser.side_effect = \
-            lambda x: self._side_effect_expand_user(x)
-        expected_passphrase = "Maresy doats and dosey doats."
-        expected_shared_secret = "ABCDEFGHABCDEFGHABCDEFGH"
-        provided_shared_secret = "ABCDEFGHABCDEFGHABCD"
-        rw_mock = unittest.mock.MagicMock()
-        rw_mock.readline.side_effect = [
-            'yes', expected_passphrase, expected_passphrase,
-            provided_shared_secret, expected_shared_secret]
-        cut = CLI(stdin=rw_mock, stdout=rw_mock)
-        args = ("add", "sam@i.am")
-        cut.parse_command_args(args)
-        cut.create_data_file()
-        cut.prompt_for_secrets()
-        calls = [
-            unittest.mock.call.write(
-                "No data file was found. Do you want to create your data" +
-                " file? (yes|no) [yes]: "),
-            unittest.mock.call.write(""),
-            unittest.mock.call.flush(),
-            unittest.mock.call.readline(),
-            unittest.mock.call.write("Enter passphrase: "),
-            unittest.mock.call.write(""),
-            unittest.mock.call.flush(),
-            unittest.mock.call.readline(),
-            unittest.mock.call.write("Confirm passphrase: "),
-            unittest.mock.call.write(""),
-            unittest.mock.call.flush(),
-            unittest.mock.call.readline(),
-            unittest.mock.call.write("Enter shared secret: "),
-            unittest.mock.call.write(""),
-            unittest.mock.call.flush(),
-            unittest.mock.call.readline(),
-            unittest.mock.call.write(
-                "Invalid shared secret string. " +
-                "Wrong length, incorrect padding, or embedded whitespace."),
-            unittest.mock.call.write("\n"),
-            unittest.mock.call.write("Enter shared secret: "),
-            unittest.mock.call.write(""),
-            unittest.mock.call.flush(),
-            unittest.mock.call.readline()]
-        rw_mock.assert_has_calls(calls)
-        self.assertEqual(12, rw_mock.write.call_count)
-        self.assertEqual(5, rw_mock.flush.call_count)
-        self.assertEqual(5, rw_mock.readline.call_count)
-        self.assertEqual(expected_passphrase, cut._CLI__passphrase)
-        self.assertEqual(expected_shared_secret, cut._CLI__shared_secret)
-
-    @unittest.mock.patch('authenticator.data.ClientFile._get_key_stretches')
-    @unittest.mock.patch('os.path.expanduser')
     def test_prompt_add_time_based_hotp_empty_secret(
             self, mock_expanduser, mock_key_stretches):
         """Test CLI.Prompt().

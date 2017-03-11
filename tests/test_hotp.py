@@ -318,25 +318,67 @@ class CoreHOTPTests(unittest.TestCase):
             actual_bytes = cut.convert_base32_secret_key(in_string)
             self.assertEqual(expected_bytes, actual_bytes)
 
-    def test_convert_base32_too_short(self):
+    def test_convert_base32_16_chars(self):
         """Test Otp.convert_base32_secret_key().
 
-        Check that an input base32 encoded string that is not multiples of 8
-        characters in length (too short) throws the expected exception.
+        Typical input string lengths are 16, 26, 32, and 64 significant
+        (ignoring padding) base32 characters. This tests a 16 character
+        base32 encoded secret.
 
         """
         cut = HOTP()
-        # First be certain the method works with a correct base32-encoded
-        # input string
-        #
-        in_string = "ABCDEFGH"
-        cut.convert_base32_secret_key(in_string)
-        # Then check that it throws the expected exception with an
-        # incorrectly sized input string.
-        #
-        in_string = "ABCDE"
-        with self.assertRaises(ValueError):
-            cut.convert_base32_secret_key(in_string)
+        in_string = "mfzw s5dv mf2g s33o"
+        in_string = "".join(in_string.split()).upper()
+        expected_bytes = b"asituation"
+        actual_bytes = cut.convert_base32_secret_key(in_string)
+        self.assertEqual(expected_bytes, actual_bytes)
+
+    def test_convert_base32_26_chars(self):
+        """Test Otp.convert_base32_secret_key().
+
+        Typical input string lengths are 16, 26, 32, and 64 significant
+        (ignoring padding) base32 characters. This tests a 26 character
+        base32 encoded secret, which requires padding the base32 secret
+        before decoding
+
+        """
+        cut = HOTP()
+        in_string = "onux i5lb oruw 63ra nzxx e3lb nq"
+        in_string = "".join(in_string.split()).upper()
+        expected_bytes = b"situation normal"
+        actual_bytes = cut.convert_base32_secret_key(in_string)
+        self.assertEqual(expected_bytes, actual_bytes)
+
+    def test_convert_base32_32_chars(self):
+        """Test Otp.convert_base32_secret_key().
+
+        Typical input string lengths are 16, 26, 32, and 64 significant
+        (ignoring padding) base32 characters. This tests a 32 character
+        base32 encoded secret
+
+        """
+        cut = HOTP()
+        in_string = "nf2c a2lt ebqw y3ba mzxx k3df mqqh k4bo"
+        in_string = "".join(in_string.split()).upper()
+        expected_bytes = b"it is all fouled up."
+        actual_bytes = cut.convert_base32_secret_key(in_string)
+        self.assertEqual(expected_bytes, actual_bytes)
+
+    def test_convert_base32_64_chars(self):
+        """Test Otp.convert_base32_secret_key().
+
+        Typical input string lengths are 16, 26, 32, and 64 significant
+        (ignoring padding) base32 characters. This tests a 64 character
+        base32 encoded secret
+
+        """
+        cut = HOTP()
+        in_string = "knux i5lb oruw 63ra nzxx e3lb nqwc a2lu e5zs" + \
+            " aylm nqqg m33v nrsw iidv oaqd ulji"
+        in_string = "".join(in_string.split()).upper()
+        expected_bytes = b"Situation normal, it\'s all fouled up :-("
+        actual_bytes = cut.convert_base32_secret_key(in_string)
+        self.assertEqual(expected_bytes, actual_bytes)
 
     def test_convert_base32_too_long(self):
         """Test Otp.convert_base32_secret_key().
