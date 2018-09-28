@@ -823,6 +823,18 @@ class CoreCLITests(unittest.TestCase):
         self.assertIn('newClientId', cut.args)
         self.assertEqual("Wat:captain@beefheart.org", cut.args.newClientId)
 
+    def test_parse_missing_args(self):
+        """Test CLI.parse_command_args().
+
+        No provided argument.
+        """
+        args = ()
+        with self.assertRaises(SystemExit):
+            with CoreCLITests.RedirectStdStreams(
+                    stdout=self.devnull, stderr=self.devnull):
+                cut = CLI()
+                cut.parse_command_args(args)
+
     def test_parse_set_client_id_missing_args(self):
         """Test CLI.parse_command_args().
 
