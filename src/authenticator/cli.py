@@ -984,10 +984,9 @@ class CLI:
 
     def _validate_args_missing_subcmd(self):
         """Validate the arguments for the CLI if no subcmd."""
-        if 'alt_data_file' in dir(self.args):
-            self.parser.error(
-                "missing subcommand (choose from 'add', 'delete', " +
-                "'del', 'generate', 'gen', 'info', 'list', 'set')")
+        if not self.args.showVersion:
+            self.parser.print_help()
+            self.parser.exit()
 
     def _validate_args_data_file(self):
         """Validate the data_file argument for the CLI."""
