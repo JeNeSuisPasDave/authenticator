@@ -982,13 +982,6 @@ class CLI:
                 self.parser.error(
                     "newClientId must not be a wildcard string")
 
-    def _validate_args_missing_subcmd(self):
-        """Validate the arguments for the CLI if no subcmd."""
-        if 'alt_data_file' in dir(self.args):
-            self.parser.error(
-                "missing subcommand (choose from 'add', 'delete', " +
-                "'del', 'generate', 'gen', 'info', 'list', 'set')")
-
     def _validate_args_data_file(self):
         """Validate the data_file argument for the CLI."""
         if not self._apply_alt_data_file_path(self.args.altDataFile):
@@ -1011,8 +1004,8 @@ class CLI:
         # check subcommands and arguments
         #
         if 'subcmd' not in dir(self.args):
-            self._validate_args_missing_subcmd()
-            return
+            self.parser.print_help()
+            self.parser.exit()
 
         if 'del' == self.args.subcmd:
             self.args.subcmd = 'delete'
