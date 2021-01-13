@@ -18,6 +18,7 @@ This implementation requires:
 import sys
 from authenticator.data import ClientData, ClientFile
 from authenticator.hotp import HOTP
+from os.path import expanduser
 
 
 class DuplicateKeyError(KeyError):
@@ -200,6 +201,9 @@ class CLI:
             action='store_true', default=False,
             help="generate passwords for counter-based HOTP/TOTP" +
             " configurations (which are skipped by default).")
+        sp_gen.add_argument(
+            '-b', '--bare', action='store_true',
+            help="output only the code.")
         sp_gen.set_defaults(subcmd='generate')
 
         # sub-command: info
@@ -506,7 +510,7 @@ class CLI:
         re_text.append('$')
         return "".join(re_text)
 
-    def _generate_once(self, cds_to_calc):
+    def _generate_once(self, cds_to_calc, bare=False):
         """Generate a HOTP for each configuration in cds_to_calc.
 
         Args:
@@ -531,10 +535,13 @@ class CLI:
                     period=cd.period())
                 if remaining_seconds < most_recent_expiration:
                     most_recent_expiration = remaining_seconds
-                print(
-                    "{0}: {1} (expires in {2} seconds)".format(
-                        cd.client_id(), code_string, remaining_seconds),
-                    file=self.__stdout)
+                if not bare:
+                    print(
+                        "{0}: {1} (expires in {2} seconds)".format(
+                            cd.client_id(), code_string, remaining_seconds),
+                        file=self.__stdout)
+                else:
+                    print(code_string, file=self.__stdout)
             elif self.args.includeCounterBasedConfigs:
                 hotp = HOTP()
                 code_string = hotp.generate_code_from_counter(
@@ -553,7 +560,7 @@ class CLI:
         else:
             return most_recent_expiration
 
-    def _generate(self, id_pattern='*', refresh=5):
+    def _generate(self, id_pattern='*', refresh=5, bare=False):
         """Generate and display the HOTP codes for the matching configurations.
 
         Args:
@@ -584,7 +591,7 @@ class CLI:
             if not first_time:
                 print("", file=self.__stdout)
             first_time = False
-            soonest_expiration = self._generate_once(cds_to_calc)
+            soonest_expiration = self._generate_once(cds_to_calc, bare=bare)
             if soonest_expiration is None:
                 # we only calculate counter-based HOTPs once
                 keep_going = False
@@ -760,6 +767,16 @@ class CLI:
 
         """
         import getpass
+
+        try:
+            pp = open(expanduser("~/.passcode"), 'r+').read().strip()
+            cf = ClientFile(pp)
+            if cf.validate(self.__data_file):
+                self.__passphrase = pp
+                self.__cf = cf
+                return
+        except Exception:
+            pass
 
         pp = None
         first_time = True
@@ -1145,7 +1162,7 @@ class CLI:
 
     def _execute_generate(self):
         """Execute the geneater action."""
-        self._generate(self.args.clientIdPattern, self.args.refresh)
+        self._generate(self.args.clientIdPattern, self.args.refresh, self.args.bare)
 
     def _execute_list(self):
         """Execute the list action."""
