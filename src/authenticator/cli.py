@@ -592,6 +592,8 @@ class CLI:
                 print("", file=self.__stdout)
             first_time = False
             soonest_expiration = self._generate_once(cds_to_calc, bare=bare)
+            if bare:
+                return
             if soonest_expiration is None:
                 # we only calculate counter-based HOTPs once
                 keep_going = False
